@@ -1,0 +1,57 @@
+<mat-toolbar color="primary">
+  <div class="toolbar">
+    <span>Macrix Fullstack .NET Developer Practical Task</span>
+    <span>
+      <mat-icon>favorite</mat-icon>
+    </span>
+  </div>
+</mat-toolbar>
+
+<div class="container" *ngIf="users$ | async as users">
+  <table mat-table [dataSource]="users" class="users-table">
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+      <th mat-header-cell *matHeaderCellDef>
+        {{column.header}}
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container *ngIf="column.columnDef === 'actions'; else default">
+            <button mat-mini-fab
+                    color="accent"
+                    class="action-btn"
+                    matTooltip="Edit user"
+                    (click)="onEdit(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab
+                    color="warn"
+                    class="action-btn"
+                    matTooltip="Remove user"
+                    (click)="onRemove(row)">
+              <mat-icon>remove</mat-icon>
+            </button>
+        </ng-container>
+        <ng-template #default>
+          {{ column?.cell(row) }}
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div class="buttons-container">
+    <button mat-mini-fab
+            color="primary"
+            matTooltip="Add new user"
+            (click)="onAdd()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <span>
+      <button mat-raised-button (click)="onCancel()" [disabled]="!(dataChanged$ | async)">Cancel</button>
+      <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!(dataChanged$ | async)">Save</button>
+    </span>
+  </div>
+</div>
+

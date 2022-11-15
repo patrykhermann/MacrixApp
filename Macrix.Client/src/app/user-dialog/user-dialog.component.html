@@ -1,0 +1,56 @@
+<h1 mat-dialog-title>{{user ? 'Edit user': 'Add user'}}</h1>
+<div mat-dialog-content class="content">
+  <form [formGroup]="userForm" (ngSubmit)="submit()" (reset)="reset()">
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Street name</mat-label>
+      <input matInput formControlName="streetName">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>House number</mat-label>
+      <input matInput formControlName="houseNumber">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Apartment number</mat-label>
+      <input matInput formControlName="apartmentNumber">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Postal code</mat-label>
+      <input matInput formControlName="postalCode">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Town</mat-label>
+      <input matInput formControlName="town">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Phone number</mat-label>
+      <input matInput formControlName="phoneNumber" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="123-456-789">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Date of birth</mat-label>
+      <input matInput formControlName="dateOfBirth" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-button type="reset">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">{{ user ? 'Edit': 'Add' }}</button>
+    </div>
+  </form>
+</div>
